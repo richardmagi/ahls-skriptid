@@ -1,15 +1,15 @@
-# phpmyadmin paigaldus
+#phpmyadmin paigaldus
 #
-# kontrollime, mitu korda phpmyadmin korral ok installed
+# kontrollime, kas phpmyadmin on installitud
 PMA=$(dpkg-query -W -f='${Status}' phpmyadmin 2>/dev/null | grep -c 'ok installed')
+#juhul kui puudub
 if [ $PMA -eq 0 ]; then
-        #
-        #
-        #
+        #siis see paigaldatakse
         echo "Paigaldame phpmyadmin ja vajalikud lisad"
         apt install phpmyadmin
         echo "phpmyadmin on paigaldatud"
-# kui PMA muutuja väärtus võrdub 1-ga
+#kui PMA on olemas
 elif [ $PMA -eq 1 ]; then
         echo "phpmyadmin on juba paigaldatud"
 fi
+#skript lõppeb
