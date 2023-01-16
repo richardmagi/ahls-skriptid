@@ -1,0 +1,17 @@
+#MySQL paigaldamine
+#!/bin/bash
+#Skripti algus
+MYSQL=$(dpkg-query -W -f='$(Status)' mysql-server 2>/dev/null | grep -c 'ok installed')
+if [ $MYSQL -eq 0 ]; then
+        #MySQL nstallimine
+        echo "MySQL paigaldatakse"
+        apt update
+        apt upgrade
+        apt install mysql-server
+        systemctl start mysql.service
+#Kui mysql on olemas
+elif [ $MYSQL -eq 1 ]; then
+        echo "MySQL on juba paigaldatud"
+        #Kotrollime, kas on olemas
+        mysql
+fi
